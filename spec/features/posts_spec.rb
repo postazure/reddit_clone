@@ -1,41 +1,69 @@
 require "rails_helper"
 
 feature PostsController do
-  scenario "#new" do
-    visit root_path
-    click_on "post-new-action"
-    #login info after authorization
-    fill_in :post_title, with: "Test Post"
-    fill_in :post_description, with: "Test Description"
-    click_on "post-create-action"
+  feature "while current_user exists" do
+    scenario "#new" do
+      #login info after authorization
+      User.create!(email:"g@g.com", username:"max", password:"123", password_confirmation:"123" )
+      visit root_path
+      click_on "signin-action"
 
-    expect(page).to have_link("post-edit-action")
-  end
+      fill_in :email, with: "g@g.com"
+      fill_in :password, with: "123"
+      click_on "user-login-action"
+      # -------------
 
-  scenario "#edit" do
-    test_post = Post.create!(title:"Testing Post", description:"Testing Description")
+      visit root_path
+      click_on "post-new-action"
 
-    visit root_path
-    click_on "post-show-action"
-    click_on "post-edit-action"
-    #login info after authorization
-    fill_in :post_title, with:"New Title"
-    fill_in :post_description, with:"New Description"
-    click_on "post-create-action"
+      fill_in :post_title, with: "Test Post"
+      fill_in :post_description, with: "Test Description"
+      click_on "post-create-action"
 
-    expect(page).to have_link("post-edit-action")
-    expect(page.current_path).to eq(post_path(test_post))
-  end
+      expect(page).to have_link("post-edit-action")
+    end
 
-  scenario "#delete" do
-    test_post = Post.create!(title:"Testing Post", description:"Testing Description")
+    scenario "#edit" do
+      #login info after authorization
+      User.create!(email:"g@g.com", username:"max", password:"123", password_confirmation:"123" )
+      visit root_path
+      click_on "signin-action"
 
-    visit root_path
-    click_on "post-show-action"
-    click_on "post-delete-action"
-    #login info after authorization
+      fill_in :email, with: "g@g.com"
+      fill_in :password, with: "123"
+      click_on "user-login-action"
+      # -------------
+      test_post = Post.create!(title:"Testing Post", description:"Testing Description")
 
-    expect(page).to have_no_link(test_post.title)
-    expect(page.current_path).to eq(root_path)
+      visit root_path
+      click_on "post-show-action"
+      click_on "post-edit-action"
+      fill_in :post_title, with:"New Title"
+      fill_in :post_description, with:"New Description"
+      click_on "post-create-action"
+
+      expect(page).to have_link("post-edit-action")
+      expect(page.current_path).to eq(post_path(test_post))
+    end
+
+    scenario "#delete" do
+      #login info after authorization
+      User.create!(email:"g@g.com", username:"max", password:"123", password_confirmation:"123" )
+      visit root_path
+      click_on "signin-action"
+
+      fill_in :email, with: "g@g.com"
+      fill_in :password, with: "123"
+      click_on "user-login-action"
+      # -------------
+      test_post = Post.create!(title:"Testing Post", description:"Testing Description")
+
+      visit root_path
+      click_on "post-show-action"
+      click_on "post-delete-action"
+
+      expect(page).to have_no_link(test_post.title)
+      expect(page.current_path).to eq(root_path)
+    end
   end
 end
