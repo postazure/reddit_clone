@@ -1,0 +1,5 @@
+<% if current_user %>
+  <%= link_to "Sign Out", "#", id:"signout-action" %>
+<% else %>
+  <%= link_to "Sign Up", signup_path, id:"signup-action" %>
+<% end %>
