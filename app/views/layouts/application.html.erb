@@ -8,6 +8,8 @@
 </head>
 <body>
 <%= render "layouts/navbar" %>
+<%= notice if notice %>
+<%= alert if alert %>
 <%= yield %>
 
 </body>
