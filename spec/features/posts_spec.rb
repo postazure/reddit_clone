@@ -2,8 +2,7 @@ require "rails_helper"
 
 feature PostsController do
   feature "while current_user exists" do
-    scenario "#new" do
-      #login info after authorization
+    before(:each) do
       User.create!(email:"g@g.com", username:"max", password:"123", password_confirmation:"123" )
       visit root_path
       click_on "signin-action"
@@ -11,8 +10,9 @@ feature PostsController do
       fill_in :email, with: "g@g.com"
       fill_in :password, with: "123"
       click_on "user-login-action"
-      # -------------
+    end
 
+    scenario "#new" do
       visit root_path
       click_on "post-new-action"
 
@@ -24,15 +24,6 @@ feature PostsController do
     end
 
     scenario "#edit" do
-      #login info after authorization
-      User.create!(email:"g@g.com", username:"max", password:"123", password_confirmation:"123" )
-      visit root_path
-      click_on "signin-action"
-
-      fill_in :email, with: "g@g.com"
-      fill_in :password, with: "123"
-      click_on "user-login-action"
-      # -------------
       test_post = Post.create!(title:"Testing Post", description:"Testing Description")
 
       visit root_path
@@ -47,15 +38,6 @@ feature PostsController do
     end
 
     scenario "#delete" do
-      #login info after authorization
-      User.create!(email:"g@g.com", username:"max", password:"123", password_confirmation:"123" )
-      visit root_path
-      click_on "signin-action"
-
-      fill_in :email, with: "g@g.com"
-      fill_in :password, with: "123"
-      click_on "user-login-action"
-      # -------------
       test_post = Post.create!(title:"Testing Post", description:"Testing Description")
 
       visit root_path
