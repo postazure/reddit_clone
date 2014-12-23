@@ -7,6 +7,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments
   end
 
   def new
@@ -15,7 +16,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-
+    @post.user_id = current_user.id
     if @post.save
       redirect_to @post, notice: "Post created succesfully"
     else

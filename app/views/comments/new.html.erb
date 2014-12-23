@@ -1,0 +1,4 @@
+<%= form_for [@post, @comment] do |f| %>
+  <%= f.text_area :description %>
+  <%= f.submit id:"comment-create-action" %>
+<% end %>
