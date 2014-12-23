@@ -1,11 +1,16 @@
-<% if current_user %>
-  <%= link_to "Edit Post", edit_post_path(@post), id:"post-edit-action" %>
-  <%= link_to "Delete Post", post_path(@post), id:"post-delete-action", method: :delete, data:{confirm: "Are you sure?"}  %>
-<% end %>
-<%= link_to "Add Comment", new_post_comment_path(@post), id:"comment-new-action" %>
+<%= @post.title %>
+<%= "- Posted by #{@post.user.username}" %>
+<%= "- #{@post.updated_at.strftime("%b %e, %Y")}" %>
+<%= @post.description %>
 
 <% @comments.each do |comment| %>
   <%= comment.description %>
-  <%= comment.user.username %>
-  <%= "#{time_ago_in_words(comment.updated_at)} ago" %>
+  <%= "- comment by #{comment.user.username}" %>
+<% end %>
+
+<%= link_to "Back", posts_path %>
+<%= link_to "Add Comment", new_post_comment_path(@post), id:"comment-new-action" %> |
+<% if current_user %>
+<%= link_to "Edit Post", edit_post_path(@post), id:"post-edit-action" %> |
+<%= link_to "Delete Post", post_path(@post), id:"post-delete-action", method: :delete, data:{confirm: "Are you sure?"} %> |
 <% end %>
