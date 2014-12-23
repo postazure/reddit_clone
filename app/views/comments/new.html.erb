@@ -1,4 +1,13 @@
+<div class="col-sm-offset-2 col-sm-8">
+  <h3>Add Comment to <%= @post.title %></h3>
+  <hr>
+
 <%= form_for [@post, @comment] do |f| %>
-  <%= f.text_area :description %>
-  <%= f.submit id:"comment-create-action" %>
+  <div class="form-group">
+    <%= f.text_area :description, rows: 5, placeholder:"Comment", class:"form-control" %>
+  </div>
+  <div class="form-group pull-right">
+    <%= f.submit id:"comment-create-action", class:"btn btn-primary" %>
+    <%= link_to "cancel", @post, class:"btn btn-default" %>
+  </div>
 <% end %>

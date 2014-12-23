@@ -7,9 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= render "layouts/navbar" %>
-<%= render "layouts/flash" %>
-<%= yield %>
+  <div class="container">
+    <%= render "layouts/navbar" %>
+
+    <div class="jumbotron">
+      <h1><%= link_to "g", root_path, class: "navbar-brand" %> | Reddit </h1>
+    </div>
+
+    <div class="main-panel">
+      <%= render "layouts/flash" %>
+
+      <%= yield %>
+    </div>
+  </div>
 
 </body>
 </html>

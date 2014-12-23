@@ -13,7 +13,7 @@ class AuthenticationController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to root_path, notice: "User signed in successfully"
     else
       redirect_to signin_path, alert:"Username / password combination is invalid"
     end

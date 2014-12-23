@@ -15,3 +15,17 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body {
+  padding-top: 20px;
+  padding-bottom: 60px;
+}
+
+.navbar-brand {
+  font-size: 70px;
+}
+
+.main-panel {
+  width: 60%;
+  margin: auto;
+}
