@@ -10,8 +10,8 @@
   <div class="panel-footer">
     <div class="text-muted">
       <em>
-        <%= "posted #{time_ago_in_words(post.updated_at)} ago" %>
-        <%= " - by #{post.user.username}" %>
+        <%= "posted #{time_ago_in_words(post.updated_at)} ago - by" %>
+        <%= link_to post.user.username, post.user %>
       </em>
     </div>
   </div>

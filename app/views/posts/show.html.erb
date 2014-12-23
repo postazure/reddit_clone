@@ -4,7 +4,8 @@
       <%= @post.title %>
       <div class="pull-right">
         <small>
-          <%= "Posted by #{@post.user.username}" %>
+          <%= "Posted by " %>
+          <%= link_to @post.user.username, @post.user %>
           <%= "- #{@post.updated_at.strftime("%b %e, %Y")}" %>
         </small>
       </div>
@@ -19,7 +20,7 @@
           <%= comment.description %>
           <div class="pull-right">
             comment by
-            <strong><%= comment.user.username %></strong>
+            <strong><%= link_to comment.user.username, comment.user %></strong>
             <div class="text-muted text-right">
               <em><%= comment.created_at.strftime("%b %e, %Y") %></em>
             </div>

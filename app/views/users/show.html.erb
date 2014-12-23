@@ -1,0 +1,29 @@
+<h3><%= @user.username %></h3>
+<hr>
+
+<dl class="dl-horizontal">
+  <dt>Member Since:</dt>
+  <dd> <%= @user.created_at.strftime("%b %e, %Y") %> </dd>
+
+  <dt>Number of Posts:</dt>
+  <dd> <%= @user.posts.count %> </dd>
+
+  <dt>Last Post:</dt>
+  <dd><%= "#{time_ago_in_words(@user.posts.last.updated_at)} ago" %></dd>
+
+  <dt>Number of Comments:</dt>
+  <dd><%= @user.comments.count %></dd>
+
+  <dt>Last Comment:</dt>
+  <dd><%= "#{time_ago_in_words(@user.comments.last.updated_at)} ago" %></dd>
+</dl>
+
+<strong>Posts:</strong>
+<hr>
+<ul class="list-unstyled">
+<% @user.posts.order(updated_at: :desc).each do |post| %>
+  <li><%= link_to post.title, post %></li>
+<% end %>
+</ul>
+<hr>
+<%= link_to "Back", root_path %>
