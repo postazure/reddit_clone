@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :ownership_control, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all.order(updated_at: :desc)
@@ -46,5 +47,12 @@ class PostsController < ApplicationController
   private
     def post_params
       params.require(:post).permit(:title, :description)
+    end
+
+    def ownership_control
+      @post = Post.find_by(id: params[:id], user_id: current_user)
+      if @post.nil?
+        redirect_to root_path, alert: "That post does not belong to you!"
+      end
     end
 end

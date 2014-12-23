@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user, only: [:new, :create]
 
   def new
     @post = Post.find(params[:post_id])
@@ -17,9 +17,9 @@ class CommentsController < ApplicationController
     end
   end
 
+
   private
     def comment_params
       params.require(:comment).permit(:description)
     end
-
 end
