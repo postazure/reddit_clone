@@ -2,17 +2,16 @@ require "rails_helper"
 
 feature PostsController do
   feature "while current_user exists" do
-    before(:each) do
-      User.create!(email:"g@g.com", username:"max", password:"123", password_confirmation:"123" )
+    scenario "#new" do
+      test_user = User.create!(email:"g@g.com", username:"max", password:"123", password_confirmation:"123" )
       visit root_path
       click_on "signin-action"
 
       fill_in :email, with: "g@g.com"
       fill_in :password, with: "123"
       click_on "user-login-action"
-    end
+      #---------------------------
 
-    scenario "#new" do
       visit root_path
       click_on "post-new-action"
 
@@ -24,7 +23,16 @@ feature PostsController do
     end
 
     scenario "#edit" do
-      test_post = Post.create!(title:"Testing Post", description:"Testing Description")
+      test_user = User.create!(email:"g@g.com", username:"max", password:"123", password_confirmation:"123" )
+      visit root_path
+      click_on "signin-action"
+
+      fill_in :email, with: "g@g.com"
+      fill_in :password, with: "123"
+      click_on "user-login-action"
+      #---------------------------
+
+      test_post = Post.create!(title:"Testing Post", description:"Testing Description", user_id:test_user.id)
 
       visit root_path
       click_on "post-show-action"
@@ -38,7 +46,16 @@ feature PostsController do
     end
 
     scenario "#delete" do
-      test_post = Post.create!(title:"Testing Post", description:"Testing Description")
+      test_user = User.create!(email:"g@g.com", username:"max", password:"123", password_confirmation:"123" )
+      visit root_path
+      click_on "signin-action"
+
+      fill_in :email, with: "g@g.com"
+      fill_in :password, with: "123"
+      click_on "user-login-action"
+      #---------------------------
+      
+      test_post = Post.create!(title:"Testing Post", description:"Testing Description", user_id:test_user.id)
 
       visit root_path
       click_on "post-show-action"

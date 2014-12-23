@@ -22,7 +22,6 @@ feature CommentsController do
     click_on "comment-create-action"
 
     expect(page).to have_content("Test Comment")
-    save_and_open_page
     expect(page).to have_content("max")
     expect(page.current_path).to eq(post_path(test_post))
   end

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :comments, only: [:new, :create]
   end
 
+  get "/users/:id" => "users#show", as: :user
+
   get   "/signup" => "registrations#new"
   post  "/signup" => "registrations#create"
 

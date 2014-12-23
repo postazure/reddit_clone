@@ -56,26 +56,6 @@ feature "User Auth" do
         expect(page.current_path).to eq(signin_path)
       end
 
-      scenario "#show" do
-        test_post = Post.create!(title:"Testing Post", description:"Testing Description")
-        visit root_path
-        click_on "post-show-action"
-
-        expect(page).to have_no_link("post-edit-action")
-      end
-    end
-
-    feature "comments" do
-      scenario "#new" do
-        test_post = Post.create!(title:"Testing Post", description:"Testing Description")
-
-        visit root_path
-        click_on "post-show-action"
-        click_on "comment-new-action"
-
-        expect(page.current_path).to eq(signin_path)
-      end
-
     end
   end
 end
