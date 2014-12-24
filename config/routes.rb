@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
 
   get "/users/:id" => "users#show", as: :user
+  patch "/users/:id" => "users#update"
 
   get   "/signup" => "registrations#new"
   post  "/signup" => "registrations#create"

@@ -51,7 +51,7 @@ class PostsController < ApplicationController
 
     def ownership_control
       @post = Post.find_by(id: params[:id], user_id: current_user)
-      if @post.nil?
+      if @post.nil? && !current_user.is_moderator
         redirect_to root_path, alert: "That post does not belong to you!"
       end
     end
