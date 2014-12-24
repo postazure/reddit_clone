@@ -19,10 +19,11 @@
 </dl>
 
 <strong>Posts:</strong>
-<hr>
 <ul class="list-unstyled">
 <% @user.posts.order(updated_at: :desc).each do |post| %>
-  <li><%= link_to post.title, post %></li>
+  <li>
+    <%= link_to post.title, post %>
+  </li>
 <% end %>
 </ul>
 <hr>
